@@ -50,9 +50,8 @@ En Vercel no hay que configurar nada: `vercel.json` ya indica el comando y la ca
 ## Ajustes en Vercel
 
 - **Analítica:** en el proyecto de Vercel, pestaña *Analytics* → *Enable*. Cuenta visitas sin cookies.
-- **Sugerencias por WhatsApp:** en *Settings → Environment Variables* crea `FEEDBACK_WHATSAPP`
-  con tu número con código de país (por ejemplo `584121234567`) y vuelve a desplegar.
-  Aparece el botón "Envíale una sugerencia a Flor" en Ajustes y en el pie. Si no la creas, no se muestra.
+- **Sugerencias:** llegan por correo a soporteflorp@gmail.com (Ajustes y pie de página).
+  Para cambiar el correo, edita `SUPPORT_EMAIL` y el enlace del pie en `src/app.html`.
 
 ## Al conectar el dominio
 

@@ -184,6 +184,8 @@ select.sort{border:1px solid var(--line);background:var(--surface);border-radius
 .about{max-width:560px;margin:0 auto;padding:8px max(16px,env(safe-area-inset-right,0px)) 8px max(16px,env(safe-area-inset-left,0px));color:var(--muted);font-size:14px}
 .credit{max-width:560px;margin:0 auto;padding:14px max(16px,env(safe-area-inset-right,0px)) calc(104px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));font-size:13px;color:var(--muted)}
 .credit p{margin:0;padding-top:14px;border-top:1px solid var(--line)}
+.credit p.credit-mail{border-top:0;padding-top:6px}
+.mail{color:var(--ink);overflow-wrap:anywhere;user-select:all}
 .credit strong{color:var(--ink);font-weight:700}
 .credit a{color:var(--ink);font-weight:600;text-underline-offset:3px}
 .credit-brand{font-family:var(--f-hand);font-weight:700;font-size:17px;color:var(--ink)}
@@ -486,6 +488,7 @@ body.big .app,body.big .guide,body.big .about,body.big .credit,body.big #layer,b
 </section>
 <footer class="credit">
   <p><span class="credit-brand">Fiao</span> · Creado por <strong>Flor Peña</strong> · © <span id="year">2026</span></p>
+  <p class="credit-mail">¿Ideas o problemas? Escribe a <a href="mailto:soporteflorp@gmail.com?subject=Sugerencia%20para%20Fiao">soporteflorp@gmail.com</a></p>
 </footer>
 <div id="layer"></div>
 
@@ -648,6 +651,7 @@ const I={
   back:'<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>',
   cog:'<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg>',
   wa:'<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.4L3 20.5l1.6-5.5A8.4 8.4 0 1 1 21 11.5Z"/></svg>',
+  mail:'<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>',
   doc:'<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/></svg>',
   pen:'<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4Z"/></svg>'
 };
@@ -1323,8 +1327,8 @@ function exportBackup(){
 let installEvt=null;
 addEventListener("beforeinstallprompt",e=>{e.preventDefault();installEvt=e});
 addEventListener("appinstalled",()=>{installEvt=null;toast("Fiao quedó instalada en tu teléfono")});
-const FEEDBACK=((document.querySelector('meta[name="fiao-feedback"]')||{}).content||"").replace(/\D/g,"");
-const feedbackHref=()=>"https://wa.me/"+FEEDBACK+"?text="+encodeURIComponent("Hola Flor, uso Fiao y tengo una sugerencia: ");
+const SUPPORT_EMAIL="soporteflorp@gmail.com";
+const supportHref=()=>"mailto:"+SUPPORT_EMAIL+"?subject="+encodeURIComponent("Sugerencia para Fiao")+"&body="+encodeURIComponent("Hola Flor, uso Fiao en mi negocio y tengo una sugerencia:\n\n");
 
 function settingsSheet(){
   openSheet(`<h3>Ajustes</h3>
@@ -1345,9 +1349,13 @@ function settingsSheet(){
       <div class="row2" style="margin-top:0"><button type="button" class="btn ghost" id="exp">Descargar respaldo</button>
         <label class="btn ghost" for="imp" style="cursor:pointer">Cargar respaldo</label><input id="imp" type="file" accept="application/json,.json" hidden></div>
     </div>
-    ${FEEDBACK.length>=8?`<div class="set-sec"><h4>¿Ideas o problemas?</h4><a class="btn ghost full" href="${feedbackHref()}" target="_blank" rel="noopener">${I.wa}Envíale una sugerencia a Flor</a></div>`:""}
+    <div class="set-sec"><h4>¿Ideas o problemas?</h4>
+      <p class="small" style="margin:0 0 10px">Escríbele a Flor a <b class="mail" id="mailTxt">${SUPPORT_EMAIL}</b>. Cada sugerencia se lee.</p>
+      <div class="row2" style="margin-top:0"><a class="btn ghost" href="${supportHref()}">${I.mail}Escribir correo</a><button type="button" class="btn ghost" id="mailCopy">Copiar correo</button></div>
+    </div>
     <p class="err" id="er"></p>`,sh=>{
       sh.querySelector("#f").addEventListener("submit",e=>{e.preventDefault();const v=sh.querySelector("#sn").value.trim().slice(0,60)||"Mi negocio";closeSheet();withUndo("Nombre guardado",()=>{db.negocio=v})});
+      sh.querySelector("#mailCopy").addEventListener("click",()=>{const fb=()=>{selectText(sh.querySelector("#mailTxt"));toast("Selecciona y copia el correo")};try{navigator.clipboard.writeText(SUPPORT_EMAIL).then(()=>toast("Correo copiado: "+SUPPORT_EMAIL),fb)}catch(e){fb()}});
       sh.querySelector("#big").addEventListener("change",e=>{db.big=e.target.checked;save();render();toast(db.big?"Letra grande activada":"Letra normal")});
       const ins=sh.querySelector("#inst"); ins&&ins.addEventListener("click",async()=>{try{installEvt.prompt();await installEvt.userChoice}catch(e){}installEvt=null;closeSheet()});
       sh.querySelector("#prods").addEventListener("click",()=>productsSheet(settingsSheet));
@@ -1379,8 +1387,7 @@ function withUndo(msg,fn,extra){
   toast(msg,[extra,{label:"Deshacer",fn:()=>{try{db=JSON.parse(snap)}catch(e){return}view.name=v.name;view.id=v.id;save();render();toast("Cambio deshecho")}}]);
 }
 
-/* Enlace de sugerencias en el pie, si está configurado */
-try{if(FEEDBACK.length>=8){const p=document.querySelector(".credit p");if(p){p.insertAdjacentHTML("beforeend",` · <a href="${feedbackHref()}" target="_blank" rel="noopener">Sugerencias</a>`)}}}catch(e){}
+
 
 try{document.getElementById("year").textContent=String(new Date().getFullYear())}catch(e){}
 render();
