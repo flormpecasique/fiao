@@ -1,15 +1,25 @@
 {
-  "name": "Fiao · Cuaderno de fiado",
+  "id": "/",
+  "name": "Fiao · Libreta de fiado",
   "short_name": "Fiao",
-  "description": "Anota lo que fías y los abonos en $ y Bs, con la tasa del día y cobro por WhatsApp. Funciona sin internet.",
+  "description": "Anota fiados y abonos en $ y Bs con la tasa del día, ve quién está atrasado y cobra por WhatsApp. Funciona sin internet.",
   "lang": "es-VE",
-  "start_url": "./",
-  "scope": "./",
+  "dir": "ltr",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
+  "orientation": "any",
   "background_color": "#f7f9ff",
   "theme_color": "#1d2a57",
+  "categories": ["business", "finance", "productivity"],
   "icons": [
-    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
-    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ],
+  "screenshots": [
+    { "src": "/screenshot-mobile.png", "sizes": "780x1688", "type": "image/png", "form_factor": "narrow", "label": "Lo que te deben tus clientes en $ y Bs" },
+    { "src": "/screenshot-wide.png", "sizes": "1280x800", "type": "image/png", "form_factor": "wide", "label": "Lista de clientes y detalle de movimientos" }
   ]
 }
