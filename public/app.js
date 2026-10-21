@@ -164,11 +164,11 @@ const I={
 function headerHTML(){
   return `<header class="top">
     <h1 class="brand">Fiao<small>${esc(db.negocio||"Mi negocio")}</small></h1>
-    <div class="rate${tasaStale()?" stale":""}" title="Tasa del día: bolívares por dólar">
-      <label for="tasa">Tasa</label>
+    <label class="rate${tasaStale()?" stale":""}" for="tasa" title="Tasa del día: bolívares por dólar">
+      <span class="rate-l" aria-hidden="true">Tasa</span>
       <input id="tasa" inputmode="decimal" enterkeyhint="done" value="${f2.format(db.tasa||0)}" aria-label="Tasa del día en bolívares por dólar">
       <span class="unit">Bs/$</span>
-    </div>
+    </label>
     <button class="helpbtn" id="ayuda" aria-label="Cómo se usa"><span class="q" aria-hidden="true">?</span><span class="t">Ayuda</span></button>
     <button class="iconbtn" id="ajustes" aria-label="Ajustes y respaldo">${I.cog}</button>
   </header>`;
@@ -350,7 +350,7 @@ function renderWelcome(){
   const prog=st>0?`<div class="wel-progress"><span class="eyebrow">Paso ${st} de 3</span><div class="bars" aria-hidden="true">${[1,2,3].map(i=>`<span class="${i<=st?"on":""}"></span>`).join("")}</div></div>`:"";
   let body="";
   if(st===0){
-    body=`<h2>Bienvenida a tu libreta de fiado</h2>
+    body=`<h2>Te damos la bienvenida a tu libreta de fiado</h2>
       <p class="lead">Fiao lleva la cuenta de lo que te deben, en dólares y en bolívares. La dejamos lista en tres pasos.</p>
       <ul class="wel-points">
         <li><span>1</span><div>El nombre de tu negocio</div></li>

@@ -1,7 +1,7 @@
 // Fiao: guarda la app en el dispositivo para que abra rápido y sin internet.
-const CACHE = "fiao-248981357";
+const CACHE = "fiao-3809197190";
 const CORE = [
-  "/", "/app.css?v=248981357", "/app.js?v=248981357", "/manifest.webmanifest",
+  "/", "/app.css?v=3809197190", "/app.js?v=3809197190", "/manifest.webmanifest",
   "/icon.svg", "/icon-192.png", "/apple-touch-icon.png",
   "/fonts/figtree-var.woff2", "/fonts/kalam-700.woff2", "/fonts/plexmono-400.woff2", "/fonts/plexmono-600.woff2"
 ];
