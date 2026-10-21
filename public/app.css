@@ -241,6 +241,39 @@ body.in-detail .guide{display:none}
 .sheet .guide-before{margin-top:0}
 .sheet .step{box-shadow:none}
 
+/* Bienvenida */
+body.welcome .guide,body.welcome .about{display:none}
+.wel{max-width:460px;margin:0 auto;padding-block:clamp(28px,8vh,72px) 40px}
+.wel-brand{font-family:var(--f-hand);font-weight:700;font-size:28px;line-height:1}
+.wel-progress{display:flex;align-items:center;gap:10px;margin-top:28px}
+.wel-progress .bars{display:flex;gap:6px;flex:1}
+.wel-progress .bars span{height:5px;flex:1;border-radius:4px;background:var(--line)}
+.wel-progress .bars span.on{background:var(--margin)}
+.wel h2{font-family:var(--f-hand);font-weight:700;font-size:clamp(34px,9vw,44px);line-height:1.05;margin:18px 0 10px;text-wrap:balance}
+.wel .lead{color:var(--muted);margin:0 0 22px;font-size:16px;max-width:42ch}
+.wel .field input{font-size:20px;min-height:54px;background:var(--surface)}
+.wel .rate-big{display:flex;align-items:center;gap:10px}
+.wel .rate-big input{font-family:var(--f-num);font-weight:600;font-size:26px}
+.wel .rate-big span{font-family:var(--f-num);color:var(--muted);font-size:18px;flex:none}
+.wel .btn{min-height:54px;font-size:16px}
+.wel-actions{display:grid;gap:10px;margin-top:8px}
+.wel-alt{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:6px}
+.wel-points{list-style:none;padding:0;margin:0 0 26px;display:grid;gap:10px}
+.wel-points li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;align-items:start}
+.wel-points li span{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-family:var(--f-hand);font-weight:700;color:var(--margin);border:2px solid currentColor;font-size:16px;line-height:1}
+
+/* Movimientos tocables */
+button.mov{width:100%;text-align:left;background:transparent;border:0;border-bottom:1px solid var(--line);cursor:pointer}
+button.mov:last-child{border-bottom:0}
+button.mov:hover{background:var(--ink-soft)}
+.history-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.history-head h3{margin:0}
+.history-head span{font-size:12px;color:var(--muted)}
+
+/* Aviso con Deshacer */
+.toast{display:flex;align-items:center;justify-content:center;gap:16px;width:max-content;max-width:min(460px,calc(100vw - 32px));text-align:left;padding:12px 18px;border-radius:14px}
+.toast button{border:0;background:transparent;color:var(--hi);font-weight:700;padding:4px 2px;text-decoration:underline;text-underline-offset:3px;flex:none}
+
 @media (prefers-reduced-motion:reduce){.sheet{animation:none}}
 @media (max-width:440px){.brand small{display:none}.rate label{display:none}.rate{padding-left:10px}.rate input{width:70px}.helpbtn .t{display:none}.helpbtn{padding:0}.helpbtn{justify-content:center}}
 
