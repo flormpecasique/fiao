@@ -76,7 +76,11 @@
 <!-- Carga rápida: tipografías propias -->
 <link rel="preload" href="/fonts/figtree-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/kalam-700.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/app.css?v=4067997951">
+<link rel="stylesheet" href="/app.css?v=290187868">
+<!-- Sugerencias por WhatsApp (se configura con FEEDBACK_WHATSAPP en Vercel) -->
+<meta name="fiao-feedback" content="">
+<!-- Vercel Web Analytics: sin cookies; se activa en el panel de Vercel -->
+<script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
 
@@ -97,24 +101,24 @@
         <h3>Pon la tasa del día</h3>
         <p>Arriba a la derecha toca el recuadro de la tasa y escribe cuántos bolívares vale un dólar hoy. Usa coma para los decimales.</p>
         <div class="demo" aria-hidden="true"><span class="demo-rate"><span class="demo-rate-l">Tasa</span><span class="demo-rate-v">36,50</span><span class="demo-rate-u">Bs/$</span></span></div>
-        <p class="step-tip">Todas las cuentas en Bs se actualizan solas con la tasa nueva.</p>
+        <p class="step-tip">Todas las cuentas en Bs se actualizan solas. Si un día no la cambias, Fiao te pregunta si sigue igual.</p>
       </div>
     </li>
     <li class="step">
       <span class="step-n" aria-hidden="true">2</span>
       <div class="step-body">
         <h3>Anota a tu cliente</h3>
-        <p>Toca el botón de abajo a la derecha. Escribe su nombre y su número de WhatsApp, y toca <b>Guardar</b>.</p>
-        <div class="demo" aria-hidden="true"><span class="demo-btn dark">+ Nuevo cliente</span></div>
-        <p class="step-tip">El teléfono es opcional, pero sin él no podrás cobrarle por WhatsApp con un toque.</p>
+        <p>Debajo de la lista toca <b>Anotar cliente nuevo</b>. Escribe su nombre y su WhatsApp, y toca <b>Guardar</b>.</p>
+        <div class="demo" aria-hidden="true"><span class="demo-btn outline" style="border-style:dashed">+ Anotar cliente nuevo</span></div>
+        <p class="step-tip">Si siempre paga un día fijo (los viernes, la quincena), indícalo en <b>Día de pago</b>. Y si quieres, ponle un <b>Límite de crédito</b>: Fiao te avisa si lo pasa.</p>
       </div>
     </li>
     <li class="step">
       <span class="step-n" aria-hidden="true">3</span>
       <div class="step-body">
         <h3>Anota lo que se lleva fiado</h3>
-        <p>Toca el nombre del cliente y luego <b>Fiar</b>. Escribe el monto, elige <b>$</b> o <b>Bs</b>, anota qué se llevó y toca <b>Anotar fiado</b>.</p>
-        <div class="demo" aria-hidden="true"><span class="demo-btn red">+ Fiar</span><span class="demo-seg"><span class="on">$</span><span>Bs</span></span></div>
+        <p>Toca el botón <b>Fiar</b> de abajo a la derecha y elige al cliente. Toca los productos que se lleva y el total se suma solo. Si no está en tu lista, toca <b>+ Producto</b> o escribe el monto en <b>$</b> o <b>Bs</b>. Luego toca <b>Anotar fiado</b>.</p>
+        <div class="demo" aria-hidden="true"><span class="demo-btn dark">+ Fiar</span><span class="demo-rate"><span>Harina PAN</span><span class="demo-rate-v">$1,20</span></span><span class="demo-seg"><span class="on">$</span><span>Bs</span></span></div>
         <p class="step-tip">Si lo anotas en Bs, Fiao lo guarda en dólares con la tasa de ese día, para que la deuda no pierda valor. ¿Se te olvidó anotarlo ayer? Cambia la fecha antes de guardar.</p>
       </div>
     </li>
@@ -133,15 +137,15 @@
         <h3>Cóbrale por WhatsApp</h3>
         <p>Si el cliente debe, toca <b>Cobrar por WhatsApp</b>. Revisa el mensaje, que ya lleva el saldo en $ y Bs, y toca <b>Abrir WhatsApp</b> para enviarlo.</p>
         <div class="demo" aria-hidden="true"><span class="demo-btn outline">Cobrar por WhatsApp</span></div>
-        <p class="step-tip">Si WhatsApp no abre, toca <b>Copiar mensaje</b> y pégalo en el chat.</p>
+        <p class="step-tip">Para evitar discusiones, toca <b>Estado de cuenta en imagen</b> y envíale el detalle de todo lo que debe. Y cuando abone, toca <b>Comprobante</b> en el aviso para mandarle su recibo.</p>
       </div>
     </li>
     <li class="step">
       <span class="step-n" aria-hidden="true">6</span>
       <div class="step-body">
         <h3>Mira quién te debe</h3>
-        <p>En la pantalla principal ves el total que te deben. Los clientes marcados en rojo llevan más de 15 días sin abonar: cóbrales primero.</p>
-        <div class="demo" aria-hidden="true"><span class="demo-tag">Atrasado</span><span class="demo-ok">Al día</span></div>
+        <p>En la pantalla principal ves el total que te deben. Arriba aparece <b>Hoy toca cobrar</b> con quienes pagan hoy. Los marcados como atrasados llevan más de 15 días sin abonar: cóbrales primero.</p>
+        <div class="demo" aria-hidden="true"><span class="demo-tag">Atrasado</span><span class="demo-tag" style="color:var(--ink);background:color-mix(in srgb,var(--hi) 55%,transparent)">Paga hoy</span><span class="demo-ok">Al día</span></div>
         <p class="step-tip">Usa el buscador o cambia el orden a “Más deben”, “Recientes” o “A–Z”.</p>
       </div>
     </li>
@@ -151,7 +155,7 @@
         <h3>Guarda un respaldo cada semana</h3>
         <p>Tus datos viven solo en este teléfono. Toca el botón de <b>Ajustes</b> (arriba, al lado de la tasa) y luego <b>Descargar respaldo</b>. Guarda ese archivo en tu correo o en Drive.</p>
         <div class="demo" aria-hidden="true"><span class="demo-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg></span><span class="demo-btn outline">Descargar respaldo</span></div>
-        <p class="step-tip">Si cambias de teléfono, abre Fiao en el nuevo, ve a Ajustes y toca <b>Cargar respaldo</b>.</p>
+        <p class="step-tip">Fiao te lo recuerda si pasan 7 días sin respaldo. Si cambias de teléfono, abre Fiao en el nuevo, ve a Ajustes y toca <b>Cargar respaldo</b>.</p>
       </div>
     </li>
     <li class="step step-extra">
@@ -175,7 +179,9 @@
     <ul>
       <li>Saldos en $ y Bs con la tasa que tú pones.</li>
       <li>Aviso de clientes atrasados con más de 15 días sin abonar.</li>
-      <li>Mensaje de cobro listo para enviar por WhatsApp.</li>
+      <li>Fiado rápido: toca los productos y el total se suma solo.</li>
+      <li>Estado de cuenta y comprobantes en imagen para WhatsApp.</li>
+      <li>Día de pago, límite de crédito y lista de “Hoy toca cobrar”.</li>
       <li>Funciona sin internet y se instala como app.</li>
     </ul>
   </div>
@@ -185,6 +191,6 @@
 </footer>
 <div id="layer"></div>
 
-<script src="/app.js?v=4067997951" defer></script>
+<script src="/app.js?v=290187868" defer></script>
 </body>
 </html>

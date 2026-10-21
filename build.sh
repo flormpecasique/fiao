@@ -13,6 +13,9 @@ if [ -z "$SITE_URL" ] && [ -n "${VERCEL_URL:-}" ]; then SITE_URL="https://$VERCE
 if [ -z "$SITE_URL" ]; then SITE_URL="https://fiao.vercel.app"; fi
 SITE_URL="${SITE_URL%/}"
 
+# Número de WhatsApp para sugerencias (solo dígitos, con código de país: 58412...). Vacío = botón oculto.
+FEEDBACK="$(printf '%s' "${FEEDBACK_WHATSAPP:-}" | tr -cd '0-9')"
+
 VERSION="$(cat src/app.html src/fonts.css src/sw.js | cksum | cut -d' ' -f1)"
 TODAY="$(date -u +%Y-%m-%d)"
 OUT=public
@@ -26,7 +29,7 @@ awk '/^<script>$/{f=1;next} /^<\/script>$/{f=0} f' src/app.html > "$OUT/app.js"
 
 # 3) Página: cabecera SEO + contenido + código (sin nada en línea, para una política de seguridad estricta)
 {
-  sed -e "s|%SITE_URL%|$SITE_URL|g" -e "s|%VERSION%|$VERSION|g" src/head.html
+  sed -e "s|%SITE_URL%|$SITE_URL|g" -e "s|%VERSION%|$VERSION|g" -e "s|%FEEDBACK%|$FEEDBACK|g" src/head.html
   awk '/^<\/style>$/{f=1;next} /^<script>$/{f=0} f' src/app.html
   printf '<script src="/app.js?v=%s" defer></script>\n</body>\n</html>\n' "$VERSION"
 } > "$OUT/index.html"

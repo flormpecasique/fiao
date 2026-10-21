@@ -8,6 +8,11 @@ Cuaderno de fiado digital para bodegas, abastos y emprendedores en Venezuela.
 - Fiados y abonos en cualquiera de las dos monedas.
 - Aviso de **atrasados** (más de 15 días sin abonar).
 - **Cobrar por WhatsApp** con el mensaje listo.
+- **Fiado rápido:** botón Fiar, eliges cliente y tocas los productos; el total se suma solo.
+- **Estado de cuenta y comprobantes** en imagen para enviar por WhatsApp.
+- **Día de pago, límite de crédito** y lista de "Hoy toca cobrar".
+- Avisos de **tasa no actualizada** y **respaldo pendiente**.
+- Bienvenida en 3 pasos, **Deshacer** en cada acción, edición de movimientos y **letra grande**.
 - **Funciona sin internet** y se instala como app (PWA).
 - Respaldo en archivo `.json`.
 - Sin servidor, sin base de datos y sin cuentas: los datos viven en el dispositivo.
@@ -42,6 +47,13 @@ Vercel ejecuta `sh build.sh` en cada `git push` a `main`. El script:
 
 En Vercel no hay que configurar nada: `vercel.json` ya indica el comando y la carpeta.
 
+## Ajustes en Vercel
+
+- **Analítica:** en el proyecto de Vercel, pestaña *Analytics* → *Enable*. Cuenta visitas sin cookies.
+- **Sugerencias por WhatsApp:** en *Settings → Environment Variables* crea `FEEDBACK_WHATSAPP`
+  con tu número con código de país (por ejemplo `584121234567`) y vuelve a desplegar.
+  Aparece el botón "Envíale una sugerencia a Flor" en Ajustes y en el pie. Si no la creas, no se muestra.
+
 ## Al conectar el dominio
 
 1. Vercel → *Settings → Domains* → añade el dominio.
@@ -60,7 +72,7 @@ En Vercel no hay que configurar nada: `vercel.json` ya indica el comando y la ca
 
 ## Siguientes pasos (cuando haya usuarios)
 
-- Plan pago: respaldo automático en la nube y varios dispositivos por negocio.
-- Recordatorio semanal de cobro a los atrasados.
-- Tasa BCV sugerida automáticamente.
-- Recibo de abono para enviar por WhatsApp.
+- Plan Pro: respaldo automático en la nube, varios teléfonos por negocio y recibos con logo.
+- Página de presentación separada de la app (`/` y `/app`).
+- Resumen del mes y exportación a Excel.
+- Deuda fija en Bs (sin indexar) por movimiento.
