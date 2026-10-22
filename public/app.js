@@ -156,6 +156,7 @@ const I={
   back:'<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>',
   cog:'<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg>',
   wa:'<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.4L3 20.5l1.6-5.5A8.4 8.4 0 1 1 21 11.5Z"/></svg>',
+  upload:'<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V4M7.5 8.5 12 4l4.5 4.5"/><path d="M5 14v4.5A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5V14"/></svg>',
   shield:'<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.3 7.5 9.5 4.3-1.2 7.5-4.9 7.5-9.5V6z"/><path d="m8.8 12.2 2.2 2.2 4.3-4.6"/></svg>',
   mail:'<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>',
   doc:'<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/></svg>',
@@ -377,7 +378,35 @@ function renderWelcome(){
       </ul>
       <p class="wel-safe">${I.shield}<span>Tus datos se guardan solo en este teléfono, no en internet. Te enseñaremos a hacer un respaldo para no perderlos.</span></p>
       <div class="wel-actions"><button class="btn main" id="wGo">Empezar</button>
-      <button class="btn ghost" id="wDemo">Prefiero ver un ejemplo primero</button></div>`;
+      <button class="btn ghost" id="wDemo">Prefiero ver un ejemplo primero</button></div>
+      <section class="wel-restore" aria-labelledby="wrT">
+        <b id="wrT">¿Ya usabas Fiao?</b>
+        <p>Si cambiaste de teléfono o se borraron tus datos, recupera tu libreta con el respaldo que guardaste. No tienes que empezar de cero.</p>
+        <label class="btn ghost" for="wFile" style="cursor:pointer">${I.upload}Recuperar mi libreta</label>
+        <input id="wFile" type="file" accept="application/json,.json" hidden>
+        <p class="err" id="wer" role="alert"></p>
+      </section>`;
+  }else if(st==="restore"&&wel.backup){
+    const d=wel.backup, own=d.clientes.filter(c=>!c.ejemplo);
+    const deben=own.reduce((t,c)=>{let b=0;d.movs.forEach(m=>{if(m.cid===c.id)b+=m.tipo==="fiado"?m.usd:-m.usd});return t+Math.max(0,Math.round(b*100)/100)},0);
+    const names=own.slice(0,4).map(c=>c.nombre);
+    body=`<h2>Encontramos tu libreta</h2>
+      <p class="lead">Revisa que sea la tuya antes de recuperarla.</p>
+      <div class="rcard">
+        <h3>${esc(d.negocio||"Mi negocio")}</h3>
+        <p class="when">${d.lastBackup?"Respaldo del "+fechaLarga(d.lastBackup):"Respaldo sin fecha"}${wel.backupName?" · "+esc(wel.backupName):""}</p>
+        <div class="rstats">
+          <div><b>${own.length}</b><span>${own.length===1?"cliente":"clientes"}</span></div>
+          <div><b>${d.movs.filter(m=>!m.ejemplo).length}</b><span>movimientos</span></div>
+          <div><b>${usd(deben)}</b><span>te deben</span></div>
+        </div>
+        ${names.length?`<p class="rnames">${names.map(esc).join(", ")}${own.length>names.length?" y "+(own.length-names.length)+" más":""}</p>`:""}
+      </div>
+      <div class="wel-actions"><button class="btn main" id="wRestore">Recuperar mi libreta</button>
+        <label class="btn ghost" for="wFile" style="cursor:pointer">Elegir otro archivo</label>
+        <input id="wFile" type="file" accept="application/json,.json" hidden></div>
+      <p class="err" id="wer" role="alert"></p>
+      <div class="wel-alt"><button type="button" class="linkbtn" id="wCancelR">Volver al inicio</button></div>`;
   }else if(st===1){
     body=`<form id="wf" novalidate><h2>¿Cómo se llama tu negocio?</h2>
       <p class="lead">Aparece en los mensajes de cobro que envías por WhatsApp.</p>
@@ -404,6 +433,33 @@ function renderWelcome(){
   const go=n=>{wel.step=n;renderWelcome();window.scrollTo(0,0);const i=app.querySelector("input");i&&setTimeout(()=>i.focus(),30)};
   const er=t=>{const e=document.getElementById("wer");if(e)e.textContent=t};
   const back=document.getElementById("wBack"); back&&back.addEventListener("click",()=>go(st-1));
+  const wf=document.getElementById("wFile");
+  if(wf) wf.addEventListener("change",ev=>{
+    const file=ev.target.files[0]; if(!file) return;
+    const fail=t=>{er(t);try{ev.target.value=""}catch(e){}};
+    if(file.size>10e6) return fail("Ese archivo es demasiado grande para ser un respaldo de Fiao.");
+    const r=new FileReader();
+    r.onerror=()=>fail("No se pudo leer el archivo. Inténtalo de nuevo.");
+    r.onload=()=>{
+      let d=null; try{d=clean(JSON.parse(r.result))}catch(e){}
+      if(!d) return fail("Ese archivo no es un respaldo de Fiao. Busca el que se llama fiao-respaldo- y la fecha, terminado en .json.");
+      if(!d.clientes.some(c=>!c.ejemplo)) return fail("Ese respaldo está vacío: no tiene clientes guardados.");
+      wel.backup=d; wel.backupName=String(file.name||"").slice(0,60); wel.step="restore"; renderWelcome(); window.scrollTo(0,0);
+    };
+    r.readAsText(file);
+  });
+  if(st==="restore"){
+    document.getElementById("wCancelR").addEventListener("click",()=>{wel.backup=null;go(0)});
+    document.getElementById("wRestore").addEventListener("click",()=>{
+      const d=wel.backup; if(!d) return go(0);
+      const n=d.clientes.filter(c=>!c.ejemplo).length;
+      d.onboarded=true; db=d; wel={step:0,negocio:"",tasa:"",nombre:"",tel:""};
+      markGuide(); markSafe(); view.name="list"; view.id=null;
+      save(); askPersist(); render(); window.scrollTo(0,0);
+      toast("¡Libreta recuperada! "+n+" "+(n===1?"cliente":"clientes")+" de vuelta.");
+    });
+    return;
+  }
   if(st===0){
     document.getElementById("wGo").addEventListener("click",()=>go(1));
     document.getElementById("wDemo").addEventListener("click",()=>{db=seed();save();view.name="list";view.id=null;render();toast("Estos clientes son de ejemplo. Bórralos cuando quieras empezar.")});

@@ -364,6 +364,19 @@ body.big .app,body.big .guide,body.big .about,body.big .credit,body.big #layer,b
 .notice{display:flex;gap:10px;align-items:flex-start;background:color-mix(in srgb,var(--hi) 22%,var(--surface));border:1px solid color-mix(in srgb,var(--hi) 70%,var(--line));border-radius:12px;padding:10px 12px;margin:0 0 12px;font-size:13.5px;line-height:1.45}
 .notice svg{width:20px;height:20px;flex:none;stroke:var(--ink);margin-top:1px}
 .notice b{color:var(--ink)}
+.wel-restore{margin-top:26px;padding-top:20px;border-top:1px dashed var(--line);display:grid;gap:10px}
+.wel-restore b{font-family:var(--f-hand);font-size:22px;line-height:1.1}
+.wel-restore p{margin:0;font-size:14px;color:var(--muted)}
+.wel-restore .btn svg{width:18px;height:18px;stroke:currentColor}
+.rcard{background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:18px 18px 16px;margin:0 0 18px;position:relative;overflow:hidden}
+.rcard::after{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--ok)}
+.rcard h3{font-family:var(--f-hand);font-weight:700;font-size:28px;line-height:1.1;margin:0 0 4px;overflow-wrap:anywhere}
+.rcard .when{font-size:13px;color:var(--muted);margin:0 0 14px}
+.rstats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.rstats div{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:10px 8px;text-align:center}
+.rstats b{display:block;font-family:var(--f-num);font-weight:600;font-size:20px;line-height:1.1;overflow-wrap:anywhere}
+.rstats span{font-size:12px;color:var(--muted)}
+.rnames{margin:12px 0 0;font-size:13.5px;color:var(--muted);overflow-wrap:anywhere}
 .wel-safe{display:flex;gap:10px;align-items:flex-start;margin:0 0 22px;font-size:14px;color:var(--muted)}
 .wel-safe svg{width:20px;height:20px;flex:none;stroke:var(--ink);margin-top:1px}
 @media (prefers-reduced-motion:reduce){.sheet{animation:none}.switch input,.switch input::after{transition:none}}
