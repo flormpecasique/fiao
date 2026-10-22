@@ -7,7 +7,7 @@ const wideMQ=window.matchMedia?matchMedia("(min-width:1000px)"):{matches:false,a
 /* ---------- datos ---------- */
 function uid(){return Math.random().toString(36).slice(2,9)+Date.now().toString(36).slice(-4)}
 function seed(){
-  const now=Date.now(), t=36.5;
+  const now=Date.now(), t=885;
   const c=[
     {id:"e1",nombre:"Señora Carmen",tel:"04141234567",nota:"Casa azul, esquina",ejemplo:true,creado:now-40*DAY,limite:15,diaPago:""},
     {id:"e2",nombre:"José el mototaxista",tel:"04249876543",nota:"",ejemplo:true,creado:now-20*DAY},
@@ -322,7 +322,7 @@ function bind(c){
   t.addEventListener("focus",()=>t.select());
   t.addEventListener("change",()=>{
     const n=parseNum(t.value);
-    if(!(n>0)){t.value=f2.format(db.tasa);toast("Escribe la tasa así: 36,50");return}
+    if(!(n>0)){t.value=f2.format(db.tasa);toast("Escribe la tasa así: 885,00");return}
     withUndo("Tasa actualizada: "+f2.format(n)+" Bs/$",()=>{db.tasa=n;db.tasaFecha=Date.now()});
   });
   t.addEventListener("keydown",e=>{if(e.key==="Enter")t.blur()});
@@ -416,7 +416,7 @@ function renderWelcome(){
   }else if(st===2){
     body=`<form id="wf" novalidate><h2>¿A cuánto está el dólar hoy?</h2>
       <p class="lead">Escribe cuántos bolívares vale un dólar. Usa la tasa que tú manejas; la puedes cambiar cuando quieras.</p>
-      <div class="field"><label for="wt">Tasa del día</label><div class="rate-big"><input id="wt" inputmode="decimal" value="${esc(wel.tasa)}" placeholder="36,50" autocomplete="off" enterkeyhint="next"><span>Bs por $</span></div></div>
+      <div class="field"><label for="wt">Tasa del día</label><div class="rate-big"><input id="wt" inputmode="decimal" value="${esc(wel.tasa)}" placeholder="885,00" autocomplete="off" enterkeyhint="next"><span>Bs por $</span></div></div>
       <p class="err" id="wer"></p>
       <div class="wel-actions"><button class="btn main">Siguiente</button></div>
       <div class="wel-alt"><button type="button" class="linkbtn" id="wBack">Atrás</button></div></form>`;
@@ -474,7 +474,7 @@ function renderWelcome(){
       wel.negocio=v.slice(0,60); go(2);
     }else if(st===2){
       const raw=document.getElementById("wt").value; const n=parseNum(raw);
-      if(!(n>0)) return er("Escribe la tasa con números, por ejemplo 36,50.");
+      if(!(n>0)) return er("Escribe la tasa con números, por ejemplo 885,00.");
       if(n>1e9) return er("Esa tasa es demasiado grande. Revisa los ceros.");
       wel.tasa=raw.trim(); go(3);
     }else{
