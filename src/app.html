@@ -355,6 +355,17 @@ body.big .sheet{max-height:80vh;max-height:80dvh}
 body.big .app,body.big .guide,body.big .about,body.big .credit,body.big #layer,body.big .toast{zoom:1.14}
 @media (max-width:999px){body.in-detail .fab{display:none}}
 
+/* Aviso: los datos viven en este teléfono */
+.alert.safe{border-color:var(--ink)}
+.alert-ic{display:flex;gap:12px;align-items:flex-start}
+.alert-ic svg{width:26px;height:26px;flex:none;stroke:var(--ink);margin-top:2px}
+.alert.danger .alert-ic svg{stroke:var(--margin)}
+.alert ul{margin:6px 0 0;padding-left:18px;font-size:14px;color:var(--muted);display:grid;gap:3px}
+.notice{display:flex;gap:10px;align-items:flex-start;background:color-mix(in srgb,var(--hi) 22%,var(--surface));border:1px solid color-mix(in srgb,var(--hi) 70%,var(--line));border-radius:12px;padding:10px 12px;margin:0 0 12px;font-size:13.5px;line-height:1.45}
+.notice svg{width:20px;height:20px;flex:none;stroke:var(--ink);margin-top:1px}
+.notice b{color:var(--ink)}
+.wel-safe{display:flex;gap:10px;align-items:flex-start;margin:0 0 22px;font-size:14px;color:var(--muted)}
+.wel-safe svg{width:20px;height:20px;flex:none;stroke:var(--ink);margin-top:1px}
 @media (prefers-reduced-motion:reduce){.sheet{animation:none}.switch input,.switch input::after{transition:none}}
 @media (max-width:440px){.brand small{display:none}.rate .rate-l{display:none}.rate{padding-left:10px}.rate input{width:70px}.helpbtn .t{display:none}.helpbtn{padding:0}.helpbtn{justify-content:center}}
 
@@ -456,7 +467,7 @@ body.big .app,body.big .guide,body.big .about,body.big .credit,body.big #layer,b
       <span class="step-n" aria-hidden="true">7</span>
       <div class="step-body">
         <h3>Guarda un respaldo cada semana</h3>
-        <p>Tus datos viven solo en este teléfono. Toca el botón de <b>Ajustes</b> (arriba, al lado de la tasa) y luego <b>Descargar respaldo</b>. Guarda ese archivo en tu correo o en Drive.</p>
+        <p>Tus datos viven solo en este teléfono: <b>si borras el historial, las cookies o los datos del navegador, se borra tu libreta</b>. Para no perder nada, toca el botón de <b>Ajustes</b> (arriba, al lado de la tasa) y luego <b>Descargar respaldo</b>. Guarda ese archivo en tu correo o en Drive.</p>
         <div class="demo" aria-hidden="true"><span class="demo-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg></span><span class="demo-btn outline">Descargar respaldo</span></div>
         <p class="step-tip">Fiao te lo recuerda si pasan 7 días sin respaldo. Si cambias de teléfono, abre Fiao en el nuevo, ve a Ajustes y toca <b>Cargar respaldo</b>.</p>
       </div>
@@ -476,7 +487,7 @@ body.big .app,body.big .guide,body.big .about,body.big .credit,body.big #layer,b
   <div>
     <h2 id="about-title">La libreta de fiado, ahora en tu teléfono</h2>
     <p>Fiao es un cuaderno de fiado digital para bodegas, abastos y emprendedores. Anota lo que fías y los abonos en dólares o bolívares, y ve al instante cuánto te debe cada cliente con la tasa del día.</p>
-    <p class="note">Gratis. Sin registro. Tus datos se guardan solo en tu teléfono.</p>
+    <p class="note">Gratis. Sin registro. Tus datos se guardan solo en tu teléfono; guarda respaldos para no perderlos.</p>
   </div>
   <div>
     <ul>
@@ -654,6 +665,7 @@ const I={
   back:'<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>',
   cog:'<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg>',
   wa:'<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.4L3 20.5l1.6-5.5A8.4 8.4 0 1 1 21 11.5Z"/></svg>',
+  shield:'<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.3 7.5 9.5 4.3-1.2 7.5-4.9 7.5-9.5V6z"/><path d="m8.8 12.2 2.2 2.2 4.3-4.6"/></svg>',
   mail:'<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>',
   doc:'<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/></svg>',
   pen:'<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4Z"/></svg>'
@@ -673,7 +685,7 @@ function headerHTML(){
 }
 
 function listHTML(rows){
-  const s=summary();
+  const s=summary(), alert=alertHTML();
   const hasEx=db.clientes.some(c=>c.ejemplo);
   const q=view.q.trim();
   return `
@@ -686,9 +698,9 @@ function listHTML(rows){
       ${s.late?`<span class="chip late"><span class="dot"></span>${s.late} ${s.late===1?"atrasado":"atrasados"} +${LATE_DAYS} días</span>`:`<span class="chip ok"><span class="dot"></span>Nadie atrasado</span>`}
     </div>
   </section>
-  ${alertHTML()}
+  ${alert}
   ${todayHTML()}
-  ${!guideSeen()?`<div class="tipcard">
+  ${!guideSeen()&&!alert?`<div class="tipcard">
       <div><b>¿Primera vez aquí?</b><span>Aprende a usar Fiao en un minuto, paso a paso.</span></div>
       <button class="btn main" id="verGuia">Ver cómo se usa</button>
       <button class="x" id="cerrarTip" aria-label="No mostrar este aviso">×</button>
@@ -722,12 +734,27 @@ function backupDue(){
   const own=db.clientes.filter(c=>!c.ejemplo); if(!own.length) return false;
   try{const sn=+localStorage.getItem(SNOOZE_KEY)||0; if(sn>Date.now()) return false}catch(e){}
   const ref=db.lastBackup||Math.min(...own.map(c=>c.creado||Date.now()));
-  return daysSince(ref)>=7;
+  if(daysSince(ref)>=7) return true;
+  /* Sin ningún respaldo y ya hay bastante anotado: no esperar a la semana */
+  const n=db.movs.filter(m=>!m.ejemplo&&m.fecha>(db.lastBackup||0)).length;
+  return !db.lastBackup&&n>=10;
 }
+/* Explicación única: dónde viven los datos y cómo no perderlos */
+const SAFE_KEY="fiao.aviso.datos";
+function safeSeen(){try{return localStorage.getItem(SAFE_KEY)==="1"}catch(e){return true}}
+function markSafe(){try{localStorage.setItem(SAFE_KEY,"1")}catch(e){}}
+function safeDue(){return !safeSeen()&&!db.lastBackup&&db.clientes.some(c=>!c.ejemplo)&&!db.clientes.some(c=>c.ejemplo)}
+/* Pide al navegador no borrar los datos por su cuenta cuando falte espacio */
+function askPersist(){try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persisted().then(p=>{if(!p)navigator.storage.persist()}).catch(()=>{})}catch(e){}}
 function alertHTML(){
   if(tasaStale()) return `<div class="alert" role="status"><div><b>¿La tasa sigue en ${f2.format(db.tasa)}?</b><span>La pusiste ${ago(db.tasaFecha)}. Revísala para que los montos en Bs salgan bien.</span></div>
     <div class="alert-btns"><button class="btn main" id="tasaFix">Cambiar tasa</button><button class="btn ghost" id="tasaOk">Sigue igual</button></div></div>`;
-  if(backupDue()) return `<div class="alert" role="status"><div><b>Guarda un respaldo</b><span>${db.lastBackup?"El último fue "+ago(db.lastBackup):"Todavía no has guardado ninguno"}. Si pierdes el teléfono, pierdes la libreta.</span></div>
+  if(safeDue()) return `<div class="alert safe" role="status"><div class="alert-ic">${I.shield}<div><b>Tu libreta vive en este teléfono</b>
+      <span>Fiao no guarda tus datos en internet. Se pueden perder si:</span>
+      <ul><li>borras el historial, las cookies o los datos del navegador,</li><li>desinstalas el navegador o reinicias el teléfono de fábrica,</li><li>pierdes o cambias de teléfono.</li></ul>
+      <span style="display:block;margin-top:6px">Guarda un respaldo de vez en cuando y tu información estará siempre a salvo.</span></div></div>
+    <div class="alert-btns"><button class="btn main" id="safeNow">Guardar respaldo</button><button class="btn ghost" id="safeOk">Entendido</button></div></div>`;
+  if(backupDue()) return `<div class="alert danger" role="status"><div class="alert-ic">${I.shield}<div><b>Guarda un respaldo</b><span>${db.lastBackup?"El último fue "+ago(db.lastBackup):"Todavía no has guardado ninguno"}. Si borras los datos del navegador o pierdes el teléfono, se pierde tu libreta.</span></div></div>
     <div class="alert-btns"><button class="btn main" id="bkNow">Guardar respaldo</button><button class="btn ghost" id="bkLater">Más tarde</button></div></div>`;
   return "";
 }
@@ -825,6 +852,8 @@ function bind(c){
   const tf=document.getElementById("tasaFix"); if(tf) tf.addEventListener("click",()=>{window.scrollTo(0,0);const i=document.getElementById("tasa");i.focus();i.select()});
   const tok=document.getElementById("tasaOk"); if(tok) tok.addEventListener("click",()=>{db.tasaFecha=Date.now();save();render();toast("Listo, tasa confirmada para hoy")});
   const bn=document.getElementById("bkNow"); if(bn) bn.addEventListener("click",()=>{exportBackup();render()});
+  const sn=document.getElementById("safeNow"); if(sn) sn.addEventListener("click",()=>{markSafe();exportBackup();render()});
+  const so=document.getElementById("safeOk"); if(so) so.addEventListener("click",()=>{markSafe();render();toast("Te recordaremos guardar respaldos")});
   const bl=document.getElementById("bkLater"); if(bl) bl.addEventListener("click",()=>{try{localStorage.setItem(SNOOZE_KEY,String(Date.now()+3*DAY))}catch(e){}render();toast("Te lo recuerdo en 3 días")});
   const ce=document.getElementById("clearEx"); if(ce) ce.addEventListener("click",clearExamples);
 
@@ -855,6 +884,7 @@ function renderWelcome(){
         <li><span>2</span><div>La tasa del dólar de hoy</div></li>
         <li><span>3</span><div>Tu primer cliente</div></li>
       </ul>
+      <p class="wel-safe">${I.shield}<span>Tus datos se guardan solo en este teléfono, no en internet. Te enseñaremos a hacer un respaldo para no perderlos.</span></p>
       <div class="wel-actions"><button class="btn main" id="wGo">Empezar</button>
       <button class="btn ghost" id="wDemo">Prefiero ver un ejemplo primero</button></div>`;
   }else if(st===1){
@@ -915,7 +945,7 @@ function finishWelcome(withClient){
   view.name="list";view.id=null;
   if(withClient&&wel.nombre){const id=uid();db.clientes.push({id,nombre:wel.nombre.slice(0,80),tel:wel.tel.slice(0,30),nota:"",creado:Date.now()});view.name="client";view.id=id}
   wel={step:0,negocio:"",tasa:"",nombre:"",tel:""};
-  save();render();window.scrollTo(0,0);
+  save();askPersist();render();window.scrollTo(0,0);
   toast(withClient?"¡Listo! Ahora toca “Fiar” para anotar lo que se lleva.":"¡Tu libreta está lista!");
 }
 
@@ -1318,7 +1348,7 @@ function clearExamples(){
 
 function exportBackup(){
   try{
-    db.lastBackup=Date.now(); save();
+    db.lastBackup=Date.now(); save(); markSafe();
     const blob=new Blob([JSON.stringify(db,null,1)],{type:"application/json"});
     const a=document.createElement("a");a.href=URL.createObjectURL(blob);
     a.download="fiao-respaldo-"+dstr(Date.now())+".json";
@@ -1359,7 +1389,8 @@ function settingsSheet(){
       <button type="button" class="btn ghost full" id="prods">Productos y precios (${db.productos.length})</button>
     </div>
     <div class="set-sec"><h4>Respaldo</h4>
-      <p class="small" style="margin:0 0 10px">Tus datos viven solo en este dispositivo. ${db.lastBackup?"Último respaldo: "+ago(db.lastBackup)+".":"Aún no has guardado ningún respaldo."}</p>
+      <div class="notice" role="note">${I.shield}<span><b>Tus datos viven solo en este dispositivo.</b> Si borras el historial, las cookies o los datos del navegador, o pierdes el teléfono, se borra tu libreta. Descarga un respaldo cada semana y guárdalo en tu correo o en Drive.</span></div>
+      <p class="small" style="margin:0 0 10px">${db.lastBackup?"Último respaldo: "+ago(db.lastBackup)+".":"Aún no has guardado ningún respaldo."}</p>
       <div class="row2" style="margin-top:0"><button type="button" class="btn ghost" id="exp">Descargar respaldo</button>
         <label class="btn ghost" for="imp" style="cursor:pointer">Cargar respaldo</label><input id="imp" type="file" accept="application/json,.json" hidden></div>
     </div>
@@ -1405,6 +1436,7 @@ function withUndo(msg,fn,extra){
 
 try{document.getElementById("year").textContent=String(new Date().getFullYear())}catch(e){}
 try{wireSupport(document)}catch(e){}
+if(db.onboarded&&db.clientes.some(c=>!c.ejemplo)) askPersist();
 render();
 try{wideMQ.addEventListener("change",render)}catch(e){try{wideMQ.addListener(render)}catch(_){}}
 

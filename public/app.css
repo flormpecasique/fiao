@@ -355,6 +355,17 @@ body.big .sheet{max-height:80vh;max-height:80dvh}
 body.big .app,body.big .guide,body.big .about,body.big .credit,body.big #layer,body.big .toast{zoom:1.14}
 @media (max-width:999px){body.in-detail .fab{display:none}}
 
+/* Aviso: los datos viven en este teléfono */
+.alert.safe{border-color:var(--ink)}
+.alert-ic{display:flex;gap:12px;align-items:flex-start}
+.alert-ic svg{width:26px;height:26px;flex:none;stroke:var(--ink);margin-top:2px}
+.alert.danger .alert-ic svg{stroke:var(--margin)}
+.alert ul{margin:6px 0 0;padding-left:18px;font-size:14px;color:var(--muted);display:grid;gap:3px}
+.notice{display:flex;gap:10px;align-items:flex-start;background:color-mix(in srgb,var(--hi) 22%,var(--surface));border:1px solid color-mix(in srgb,var(--hi) 70%,var(--line));border-radius:12px;padding:10px 12px;margin:0 0 12px;font-size:13.5px;line-height:1.45}
+.notice svg{width:20px;height:20px;flex:none;stroke:var(--ink);margin-top:1px}
+.notice b{color:var(--ink)}
+.wel-safe{display:flex;gap:10px;align-items:flex-start;margin:0 0 22px;font-size:14px;color:var(--muted)}
+.wel-safe svg{width:20px;height:20px;flex:none;stroke:var(--ink);margin-top:1px}
 @media (prefers-reduced-motion:reduce){.sheet{animation:none}.switch input,.switch input::after{transition:none}}
 @media (max-width:440px){.brand small{display:none}.rate .rate-l{display:none}.rate{padding-left:10px}.rate input{width:70px}.helpbtn .t{display:none}.helpbtn{padding:0}.helpbtn{justify-content:center}}
 
