@@ -50,7 +50,8 @@ En Vercel no hay que configurar nada: `vercel.json` ya indica el comando y la ca
 ## Ajustes en Vercel
 
 - **Analítica:** en el proyecto de Vercel, pestaña *Analytics* → *Enable*. Cuenta visitas sin cookies.
-- **Sugerencias:** llegan por correo a soporteflorp@gmail.com (Ajustes y pie de página).
+- **Sugerencias:** llegan por correo a soporteflorpc@gmail.com desde el enlace "Escribe tu sugerencia aquí"
+  (pie de página y Ajustes). En el teléfono abre la app de correo; en el ordenador, Gmail.
   Para cambiar el correo, edita `SUPPORT_EMAIL` y el enlace del pie en `src/app.html`.
 
 ## Al conectar el dominio

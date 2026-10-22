@@ -188,7 +188,7 @@ select.sort{border:1px solid var(--line);background:var(--surface);border-radius
 .credit p.credit-mail{border-top:0;padding-top:6px}
 .credit a{overflow-wrap:anywhere}
 .mail{color:var(--ink);overflow-wrap:anywhere;user-select:all}
-.credit strong{color:var(--ink);font-weight:700}
+.credit strong,.credit .credit-name{color:var(--ink);font-weight:700}
 .credit a{color:var(--ink);font-weight:600;text-underline-offset:3px}
 .credit-brand{font-family:var(--f-hand);font-weight:700;font-size:17px;color:var(--ink)}
 .about h2{font-family:var(--f-hand);font-weight:700;color:var(--ink);font-size:24px;line-height:1.15;margin:0 0 6px;text-wrap:balance}

@@ -832,8 +832,19 @@ function exportBackup(){
 let installEvt=null;
 addEventListener("beforeinstallprompt",e=>{e.preventDefault();installEvt=e});
 addEventListener("appinstalled",()=>{installEvt=null;toast("Fiao quedó instalada en tu teléfono")});
-const SUPPORT_EMAIL="soporteflorp@gmail.com";
-const supportHref=()=>"mailto:"+SUPPORT_EMAIL+"?subject="+encodeURIComponent("Sugerencia para Fiao")+"&body="+encodeURIComponent("Hola Flor, uso Fiao en mi negocio y tengo una sugerencia:\n\n");
+const SUPPORT_EMAIL="soporteflorpc@gmail.com";
+const SUPPORT_SUBJECT="Sugerencia para Fiao", SUPPORT_BODY="Hola Flor, uso Fiao en mi negocio y tengo una sugerencia:\n\n";
+/* En el teléfono abre la app de correo (Gmail en Android); en el ordenador, Gmail en una pestaña nueva */
+const isDesktop=()=>{try{return matchMedia("(hover:hover) and (pointer:fine)").matches}catch(e){return false}};
+const supportHref=()=>isDesktop()
+  ?"https://mail.google.com/mail/?view=cm&fs=1&to="+encodeURIComponent(SUPPORT_EMAIL)+"&su="+encodeURIComponent(SUPPORT_SUBJECT)+"&body="+encodeURIComponent(SUPPORT_BODY)
+  :"mailto:"+SUPPORT_EMAIL+"?subject="+encodeURIComponent(SUPPORT_SUBJECT)+"&body="+encodeURIComponent(SUPPORT_BODY);
+function wireSupport(root){
+  (root||document).querySelectorAll("[data-support]").forEach(a=>{
+    a.href=supportHref();
+    if(isDesktop()){a.target="_blank";a.rel="noopener"}else{a.removeAttribute("target")}
+  });
+}
 
 function settingsSheet(){
   openSheet(`<h3>Ajustes</h3>
@@ -855,12 +866,12 @@ function settingsSheet(){
         <label class="btn ghost" for="imp" style="cursor:pointer">Cargar respaldo</label><input id="imp" type="file" accept="application/json,.json" hidden></div>
     </div>
     <div class="set-sec"><h4>¿Ideas o problemas?</h4>
-      <p class="small" style="margin:0 0 10px">Escríbele a Flor a <b class="mail" id="mailTxt">${SUPPORT_EMAIL}</b>. Cada sugerencia se lee.</p>
-      <div class="row2" style="margin-top:0"><a class="btn ghost" href="${supportHref()}">${I.mail}Escribir correo</a><button type="button" class="btn ghost" id="mailCopy">Copiar correo</button></div>
+      <p class="small" style="margin:0 0 10px">Cuéntale a Flor qué mejorarías o qué falló. Cada sugerencia se lee.</p>
+      <a class="btn ghost full" data-support href="#">${I.mail}Escribe tu sugerencia aquí</a>
     </div>
     <p class="err" id="er"></p>`,sh=>{
       sh.querySelector("#f").addEventListener("submit",e=>{e.preventDefault();const v=sh.querySelector("#sn").value.trim().slice(0,60)||"Mi negocio";closeSheet();withUndo("Nombre guardado",()=>{db.negocio=v})});
-      sh.querySelector("#mailCopy").addEventListener("click",()=>{const fb=()=>{selectText(sh.querySelector("#mailTxt"));toast("Selecciona y copia el correo")};try{navigator.clipboard.writeText(SUPPORT_EMAIL).then(()=>toast("Correo copiado: "+SUPPORT_EMAIL),fb)}catch(e){fb()}});
+      wireSupport(sh);
       sh.querySelector("#big").addEventListener("change",e=>{db.big=e.target.checked;save();render();toast(db.big?"Letra grande activada":"Letra normal")});
       const ins=sh.querySelector("#inst"); ins&&ins.addEventListener("click",async()=>{try{installEvt.prompt();await installEvt.userChoice}catch(e){}installEvt=null;closeSheet()});
       sh.querySelector("#prods").addEventListener("click",()=>productsSheet(settingsSheet));
@@ -895,6 +906,7 @@ function withUndo(msg,fn,extra){
 
 
 try{document.getElementById("year").textContent=String(new Date().getFullYear())}catch(e){}
+try{wireSupport(document)}catch(e){}
 render();
 try{wideMQ.addEventListener("change",render)}catch(e){try{wideMQ.addListener(render)}catch(_){}}
 
